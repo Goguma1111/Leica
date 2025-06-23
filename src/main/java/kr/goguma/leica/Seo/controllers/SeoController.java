@@ -1,4 +1,4 @@
-package kr.goguma.leica.controllers;
+package kr.goguma.leica.Seo.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
