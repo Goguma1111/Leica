@@ -4,12 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class controller {
+public class SopphaController {
 
 
-    @GetMapping("/index")
+    @GetMapping("/soppha")
     public String index(){
-        return "index";
+        return "soppha";
 
     }
 }
