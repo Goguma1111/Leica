@@ -4,7 +4,7 @@ import React, {memo} from 'react';
 import styled from 'styled-components';
 
 const Graph2Container = styled.div`
-    background-color:rgb(138, 72, 110);
+    background-color:rgb(255, 134, 205);
     padding: 20px;
 `;
 
