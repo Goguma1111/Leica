@@ -8,9 +8,9 @@ public class a_Controller {
 
 
 
-    @GetMapping("/jina")
+    @GetMapping("/Graph")
     public String home() {
-        return "jina";
+        return "Graph";
     }
 
 }
