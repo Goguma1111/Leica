@@ -11,7 +11,7 @@ const Graph1Container = styled.div`
 const Graph1 = memo(() => {
   return (
     <Graph1Container>
-      <h2>Graph 1</h2>
+      <h2>날짜별 신규 회원 수</h2>
     </Graph1Container>
   );
 });
