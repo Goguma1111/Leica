@@ -11,7 +11,7 @@ const Graph2Container = styled.div`
 const Graph2 = memo(() => {
   return (
     <Graph2Container>
-      <h2>Graph 2</h2>
+      <h2>날짜별 총 매출</h2>
     </Graph2Container>
   );
 });
