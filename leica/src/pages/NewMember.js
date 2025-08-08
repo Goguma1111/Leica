@@ -8,7 +8,7 @@
  * yarn add chart.js react-chartjs-2
  */
 
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 import {
     //공통항목들
@@ -50,21 +50,27 @@ Chart.register(
 );
 
 const ChartContainer = styled.div`
+    width: 100%;
+
     .chart-wrapper {
         display: flex;
         flex-wrap: wrap;
+        width: 100%;
 
         /**그래프의 크기를 제어하는 역할 */
         .chart-item {
-            max-width: 100%;
+            width: 100%;
             padding: 20px;
             box-sizing: border-box;
             height: 400px;
+            flex: 1;
         }
     }
 `;
 
 const ChartEx = memo(() => {
+    const [viewType, setViewType] = useState("daily");
+
     return (
         <ChartContainer>
             <h2>Chart</h2>
@@ -74,10 +80,27 @@ const ChartEx = memo(() => {
                 {/** 선 그래프 */}
                 <div className="chart-item">
                     <h3>선 그래프</h3>
+                    <select
+                        id="viewType"
+                        value={viewType}
+                        onChange={(e) => setViewType(e.target.value)}
+                        style={{
+                            display: "block",
+                            width: "192px",
+                            padding: "8px 12px",
+                            border: "1px solid #d1d5db",
+                            borderRadius: "6px",
+                            fontSize: "14px",
+                            backgroundColor: "white",
+                            cursor: "pointer",
+                        }}>
+                        <option value="daily">일간별</option>
+                        <option value="weekly">주간별</option>
+                    </select>
                     <Line
                         options={{
                             responsive: true, //반응형 기능 사용
-                            maintainAspectRatio: true, //세로 높이를 스스로 설정(false인 경우 부모에 맞춤)
+                            maintainAspectRatio: false, //세로 높이를 스스로 설정(false인 경우 부모에 맞춤)
                             plugins: {
                                 legend: {
                                     position: "bottom", //범주의 위치
@@ -94,7 +117,13 @@ const ChartEx = memo(() => {
                                     borderColor: "rgba(255, 99, 132, 1)",
                                     borderWidth: 1,
                                 },
-
+                                {
+                                    label: "가입자 수",
+                                    data: [1237, 1108, 719, 2042, 1775, 1580, 1605],
+                                    backgroundColor: "rgba(255, 99, 132, 0.5)",
+                                    borderColor: "rgba(255, 99, 132, 1)",
+                                    borderWidth: 1,
+                                },
                             ],
                         }}
                     />
