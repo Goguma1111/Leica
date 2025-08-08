@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class a_Controller {
 
-
-
     @GetMapping("/Graph")
     public String home() {
         return "Graph";
