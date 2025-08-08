@@ -43,18 +43,18 @@ yarn start
 ## 🛠 기술 스택
 
 ### Backend
-- Java 17
-- Spring Boot 3.x
-- MyBatis
+- Java 21
+- Spring Boot 3.5.4
+- MyBatis 3.0.3
 - H2 Database
 - Gradle
 
 ### Frontend
-- React 19
-- Styled Components
-- Chart.js
-- React Router
-- Yarn
+- React 19.1.1
+- Styled Components 6.1.19
+- Chart.js 4.5.0
+- React Router 7.7.1
+- Yarn 1.22.22
 
 ## 📊 주요 기능
 
