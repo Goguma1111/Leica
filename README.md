@@ -14,7 +14,7 @@ Leica/
 │   └── gradlew        # Gradle Wrapper
 ├── frontend/          # React 프론트엔드
 │   ├── src/           # React 소스 코드
-│   │   ├── images/    # 상품 이미지 (프론트엔드에서 사용)
+│   │   ├── images/    # 상품 이미지 
 │   │   └── ...
 │   ├── public/        # 정적 파일
 │   ├── package.json   # Node.js 의존성
