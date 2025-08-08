@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.goguma.leica.Seo.mapper.TodayBestProductMapper">
+    
+    <resultMap id="TodayBestProductResultMap" type="kr.goguma.leica.Seo.vo.TodayBestProduct">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="cnt" property="cnt"/>
+        <result column="reg_date" property="regDate"/>
+    </resultMap>
+    
+    <select id="selectWeeklyList" resultMap="TodayBestProductResultMap">
+        SELECT id, title, cnt, reg_date 
+        FROM today_best_product 
+        ORDER BY cnt DESC 
+        LIMIT 5
+    </select>
+    
+    <select id="selectAll" resultMap="TodayBestProductResultMap">
+        SELECT id, title, cnt, reg_date 
+        FROM today_best_product 
+        ORDER BY cnt DESC
+    </select>
+    
+    <select id="selectById" parameterType="int" resultMap="TodayBestProductResultMap">
+        SELECT id, title, cnt, reg_date 
+        FROM today_best_product 
+        WHERE id = #{id}
+    </select>
+    
+    <insert id="insert" parameterType="kr.goguma.leica.Seo.vo.TodayBestProduct">
+        INSERT INTO today_best_product (title, cnt, reg_date) 
+        VALUES (#{title}, #{cnt}, #{regDate})
+    </insert>
+    
+    <select id="aggregateYesterdaySales" resultMap="TodayBestProductResultMap">
+        SELECT 
+            0 as id,
+            product_name as title,
+            SUM(quantity) as cnt,
+            NOW() as reg_date
+        FROM sales 
+        WHERE DATE(sale_date) = DATE(NOW() - INTERVAL 1 DAY)
+        GROUP BY product_name 
+        ORDER BY cnt DESC 
+        LIMIT 5
+    </select>
+    
+    <select id="aggregateDailySales" resultMap="TodayBestProductResultMap">
+        SELECT 
+            0 as id,
+            product_name as title,
+            SUM(quantity) as cnt,
+            NOW() as reg_date
+        FROM sales 
+        WHERE DATE(sale_date) = DATE(NOW())
+        GROUP BY product_name 
+        ORDER BY cnt DESC 
+        LIMIT 5
+    </select>
+    
+    <select id="aggregateWeeklySales" resultMap="TodayBestProductResultMap">
+        SELECT 
+            0 as id,
+            product_name as title,
+            SUM(quantity) as cnt,
+            NOW() as reg_date
+        FROM sales 
+        WHERE sale_date >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+        GROUP BY product_name 
+        ORDER BY cnt DESC 
+        LIMIT 5
+    </select>
+    
+</mapper> 
