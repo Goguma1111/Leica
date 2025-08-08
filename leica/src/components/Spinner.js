@@ -20,7 +20,7 @@ const Spinner = memo(({ loading = true, width = 100, height = 100 }) => {
                 zIndex: 9999,
                 left: "50%",
                 top: "50%",
-                trasform: "translate(-50%, -50%)",
+                trasnform: "translate(-50%, -50%)",
             }}
             wrapperClass="blocks-wrapper"
         />

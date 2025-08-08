@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import TitanicSlice from './slices/TitanicSlice';
+import LeicaSlice from './slices/LeicaSlice';
 
 const store = configureStore({
   reducer: {
-    TitanicSlice
+    LeicaSlice
   },
 });
 

@@ -1,28 +1,24 @@
-import React, {memo, useMemo} from 'react';
+import React, { memo } from "react";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
+/**컴포넌트 참조 */
+import Spinner from "../components/Spinner";
 
-/** 컴포넌트 참조 */
-import Spinner from '../components/Spinner';
-import Graph1 from './Graph1';
-import Graph2 from './Graph2';
-import Graph3 from './Graph3';
-
-
+import NewMember from "./NewMember";
 
 const PagesContainer = styled.div`
+    /**영역 확인을 위한 임시 코드 */
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 20px;
 `;
 
 const Pages = memo(() => {
+
     return (
         <PagesContainer>
-            <Graph1 />
-            <Graph2 />
-            <Graph3 />
+            <NewMember />
         </PagesContainer>
     );
 });
