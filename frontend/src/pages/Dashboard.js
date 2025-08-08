@@ -1,13 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PopularProductsChart from '../components/PopularProductsChart';
-
-
-// 이미지 import
-import leicaQ3 from '../images/products/leica-q3.jpg';
-import leicaM11P from '../images/products/leica-m11p.jpg';
-import leicaDLux8 from '../images/products/leica-dlux8.jpg';
-import leicaSL3 from '../images/products/leica-sl3.jpg';
+import Graph1 from './Graph1';
+import Graph2 from './Graph2';
 
 const DashboardContainer = styled.div`
   display: grid;
@@ -326,7 +321,7 @@ const ProductImage = styled.div`
   color: #6b7280;
   overflow: hidden;
   flex-shrink: 0;
-  
+
   img {
     width: 100%;
     height: 100%;
@@ -498,10 +493,14 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
-                  <img 
-                    src={leicaQ3} 
-                    alt="Leica Q3" 
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/products/leica-q3.jpg`}
+                    alt="Leica Q3"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      console.error('이미지 로드 실패:', e.target.src);
+                      e.target.style.display = 'none';
+                    }}
                   />
                 </ProductImage>
                 <ProductName>Leica Q3</ProductName>
@@ -510,13 +509,8 @@ export default function Dashboard() {
             <OrderAmount>₩2,500,000</OrderAmount>
             <StatusTag status="pending">배송 준비중</StatusTag>
           </OrderItem>
-<<<<<<< HEAD:leica/src/pages/Dashboard.js
 
-          <OrderItem>
-=======
-          
           <OrderItem index={1}>
->>>>>>> 59c6c973246045d324bfec352f19bc78772a7450:frontend/src/pages/Dashboard.js
             <OrderInfo>
               <CustomerSection>
                 <CustomerAvatar>
@@ -529,10 +523,14 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
-                  <img 
-                    src={leicaM11P} 
-                    alt="Leica M11-P" 
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/products/leica-m11p.jpg`}
+                    alt="Leica M11-P"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      console.error('이미지 로드 실패:', e.target.src);
+                      e.target.style.display = 'none';
+                    }}
                   />
                 </ProductImage>
                 <ProductName>Leica M11-P</ProductName>
@@ -541,13 +539,8 @@ export default function Dashboard() {
             <OrderAmount>₩1,800,000</OrderAmount>
             <StatusTag status="delivered">배송완료</StatusTag>
           </OrderItem>
-<<<<<<< HEAD:leica/src/pages/Dashboard.js
 
-          <OrderItem>
-=======
-          
           <OrderItem index={2}>
->>>>>>> 59c6c973246045d324bfec352f19bc78772a7450:frontend/src/pages/Dashboard.js
             <OrderInfo>
               <CustomerSection>
                 <CustomerAvatar>
@@ -560,10 +553,14 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
-                  <img 
-                    src={leicaDLux8} 
-                    alt="Leica D-Lux8" 
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/products/leica-dlux8.jpg`}
+                    alt="Leica D-Lux8"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      console.error('이미지 로드 실패:', e.target.src);
+                      e.target.style.display = 'none';
+                    }}
                   />
                 </ProductImage>
                 <ProductName>Leica D-Lux8</ProductName>
@@ -572,13 +569,8 @@ export default function Dashboard() {
             <OrderAmount>₩3,200,000</OrderAmount>
             <StatusTag status="delivered">배송완료</StatusTag>
           </OrderItem>
-<<<<<<< HEAD:leica/src/pages/Dashboard.js
 
-          <OrderItem>
-=======
-          
           <OrderItem index={3}>
->>>>>>> 59c6c973246045d324bfec352f19bc78772a7450:frontend/src/pages/Dashboard.js
             <OrderInfo>
               <CustomerSection>
                 <CustomerAvatar>
@@ -591,10 +583,14 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
-                  <img 
-                    src={leicaSL3} 
-                    alt="Leica SL3" 
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/products/leica-sl3.jpg`}
+                    alt="Leica SL3"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      console.error('이미지 로드 실패:', e.target.src);
+                      e.target.style.display = 'none';
+                    }}
                   />
                 </ProductImage>
                 <ProductName>Leica SL3</ProductName>
