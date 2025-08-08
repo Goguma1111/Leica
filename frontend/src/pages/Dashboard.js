@@ -3,6 +3,12 @@ import styled from 'styled-components';
 import PopularProductsChart from '../components/PopularProductsChart';
 
 
+// 이미지 import
+import leicaQ3 from '../images/products/leica-q3.jpg';
+import leicaM11P from '../images/products/leica-m11p.jpg';
+import leicaDLux8 from '../images/products/leica-dlux8.jpg';
+import leicaSL3 from '../images/products/leica-sl3.jpg';
+
 const DashboardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -261,10 +267,18 @@ const OrderItem = styled.div`
 const OrderInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
+  flex: 1;
 `;
 
-const OrderAvatar = styled.div`
+const CustomerSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 200px;
+`;
+
+const CustomerAvatar = styled.div`
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
@@ -274,25 +288,89 @@ const OrderAvatar = styled.div`
   justify-content: center;
   font-weight: 600;
   color: #6b7280;
+  flex-shrink: 0;
 `;
 
-const OrderDetails = styled.div`
-  flex: 1;
+const CustomerDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 `;
 
-const OrderName = styled.div`
+const CustomerName = styled.div`
   font-weight: 500;
   color: #111827;
 `;
 
 const OrderDate = styled.div`
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: #6b7280;
+`;
+
+const ProductSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+`;
+
+const ProductImage = styled.div`
+  width: 3rem;
+  height: 3rem;
+  border-radius: 8px;
+  background: ${props => props.bgColor || '#f3f4f6'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #6b7280;
+  overflow: hidden;
+  flex-shrink: 0;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const ProductName = styled.div`
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.875rem;
 `;
 
 const OrderAmount = styled.div`
   font-weight: 600;
   color: #111827;
+  text-align: right;
+  min-width: 120px;
+`;
+
+const StatusTag = styled.div`
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: ${props => {
+    switch(props.status) {
+      case 'delivered': return '#dcfce7';
+      case 'pending': return '#fef3c7';
+      case 'cancelled': return '#fee2e2';
+      default: return '#e5e7eb';
+    }
+  }};
+  color: ${props => {
+    switch(props.status) {
+      case 'delivered': return '#166534';
+      case 'pending': return '#92400e';
+      case 'cancelled': return '#991b1b';
+      default: return '#6b7280';
+    }
+  }};
+  margin-left: 0.5rem;
+  min-width: 80px;
+  text-align: center;
 `;
 
 export default function Dashboard() {
@@ -407,48 +485,123 @@ export default function Dashboard() {
       <OrdersSection>
         <OrdersCard>
           <OrdersTitle>최근 주문</OrdersTitle>
-          <OrderItem>
+          <OrderItem index={0}>
             <OrderInfo>
-              <OrderAvatar>S</OrderAvatar>
-              <OrderDetails>
-                <OrderName>서혜정</OrderName>
-                <OrderDate>2025-08-08 14:30</OrderDate>
-              </OrderDetails>
+              <CustomerSection>
+                <CustomerAvatar>
+                  <span>J</span>
+                </CustomerAvatar>
+                <CustomerDetails>
+                  <CustomerName>JAY</CustomerName>
+                  <OrderDate>2025-08-08 14:30</OrderDate>
+                </CustomerDetails>
+              </CustomerSection>
+              <ProductSection>
+                <ProductImage bgColor="#f3f4f6">
+                  <img 
+                    src={leicaQ3} 
+                    alt="Leica Q3" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </ProductImage>
+                <ProductName>Leica Q3</ProductName>
+              </ProductSection>
             </OrderInfo>
             <OrderAmount>₩2,500,000</OrderAmount>
+            <StatusTag status="pending">배송 준비중</StatusTag>
           </OrderItem>
+<<<<<<< HEAD:leica/src/pages/Dashboard.js
 
           <OrderItem>
+=======
+          
+          <OrderItem index={1}>
+>>>>>>> 59c6c973246045d324bfec352f19bc78772a7450:frontend/src/pages/Dashboard.js
             <OrderInfo>
-              <OrderAvatar>L</OrderAvatar>
-              <OrderDetails>
-                <OrderName>이시아</OrderName>
-                <OrderDate>2025-08-08 13:15</OrderDate>
-              </OrderDetails>
+              <CustomerSection>
+                <CustomerAvatar>
+                  <span>S</span>
+                </CustomerAvatar>
+                <CustomerDetails>
+                  <CustomerName>서혜정</CustomerName>
+                  <OrderDate>2025-08-08 13:15</OrderDate>
+                </CustomerDetails>
+              </CustomerSection>
+              <ProductSection>
+                <ProductImage bgColor="#f3f4f6">
+                  <img 
+                    src={leicaM11P} 
+                    alt="Leica M11-P" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </ProductImage>
+                <ProductName>Leica M11-P</ProductName>
+              </ProductSection>
             </OrderInfo>
             <OrderAmount>₩1,800,000</OrderAmount>
+            <StatusTag status="delivered">배송완료</StatusTag>
           </OrderItem>
+<<<<<<< HEAD:leica/src/pages/Dashboard.js
 
           <OrderItem>
+=======
+          
+          <OrderItem index={2}>
+>>>>>>> 59c6c973246045d324bfec352f19bc78772a7450:frontend/src/pages/Dashboard.js
             <OrderInfo>
-              <OrderAvatar>P</OrderAvatar>
-              <OrderDetails>
-                <OrderName>박진아</OrderName>
-                <OrderDate>2025-08-08 12:45</OrderDate>
-              </OrderDetails>
+              <CustomerSection>
+                <CustomerAvatar>
+                  <span>L</span>
+                </CustomerAvatar>
+                <CustomerDetails>
+                  <CustomerName>이시아</CustomerName>
+                  <OrderDate>2025-08-08 12:45</OrderDate>
+                </CustomerDetails>
+              </CustomerSection>
+              <ProductSection>
+                <ProductImage bgColor="#f3f4f6">
+                  <img 
+                    src={leicaDLux8} 
+                    alt="Leica D-Lux8" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </ProductImage>
+                <ProductName>Leica D-Lux8</ProductName>
+              </ProductSection>
             </OrderInfo>
             <OrderAmount>₩3,200,000</OrderAmount>
+            <StatusTag status="delivered">배송완료</StatusTag>
           </OrderItem>
+<<<<<<< HEAD:leica/src/pages/Dashboard.js
 
           <OrderItem>
+=======
+          
+          <OrderItem index={3}>
+>>>>>>> 59c6c973246045d324bfec352f19bc78772a7450:frontend/src/pages/Dashboard.js
             <OrderInfo>
-              <OrderAvatar>J</OrderAvatar>
-              <OrderDetails>
-                <OrderName>JAY</OrderName>
-                <OrderDate>2025-08-08 11:20</OrderDate>
-              </OrderDetails>
+              <CustomerSection>
+                <CustomerAvatar>
+                  <span>P</span>
+                </CustomerAvatar>
+                <CustomerDetails>
+                  <CustomerName>박진아</CustomerName>
+                  <OrderDate>2025-08-08 11:20</OrderDate>
+                </CustomerDetails>
+              </CustomerSection>
+              <ProductSection>
+                <ProductImage bgColor="#f3f4f6">
+                  <img 
+                    src={leicaSL3} 
+                    alt="Leica SL3" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </ProductImage>
+                <ProductName>Leica SL3</ProductName>
+              </ProductSection>
             </OrderInfo>
             <OrderAmount>₩1,500,000</OrderAmount>
+            <StatusTag status="cancelled">주문취소</StatusTag>
           </OrderItem>
         </OrdersCard>
       </OrdersSection>
