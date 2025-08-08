@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -11,115 +11,106 @@ import {
 } from 'chart.js';
 import styled from 'styled-components';
 
+// Chart.js 등록
 ChartJS.register(
-  CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
 );
 
 const ChartContainer = styled.div`
   background: white;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 20px 0;
 `;
 
 const ChartTitle = styled.h3`
-  margin: 0 0 20px 0;
-  color: #333;
   font-size: 18px;
   font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
 `;
 
 const ToggleContainer = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 20px;
 `;
 
 const ToggleButton = styled.button`
   padding: 8px 16px;
-  border: 1px solid #e5e7eb;
-  background: ${props => props.active ? '#8B5CF6' : 'white'};
-  color: ${props => props.active ? 'white' : '#6B7280'};
+  border: 2px solid ${props => props.active ? '#007bff' : '#e0e0e0'};
+  background: ${props => props.active ? '#007bff' : 'white'};
+  color: ${props => props.active ? 'white' : '#333'};
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
-  
+  font-weight: 500;
+  transition: all 0.2s ease;
+
   &:hover {
-    background: ${props => props.active ? '#7C3AED' : '#F9FAFB'};
+    background: ${props => props.active ? '#0056b3' : '#f8f9fa'};
+    border-color: ${props => props.active ? '#0056b3' : '#007bff'};
+  }
+
+  @media (max-width: 768px) {
+    padding: 6px 12px;
+    font-size: 14px;
   }
 `;
 
 const ChartWrapper = styled.div`
-  height: 400px;
   position: relative;
-`;
-
-const LoadingText = styled.div`
-  text-align: center;
-  color: #6B7280;
-  font-size: 14px;
-  margin: 20px 0;
-`;
-
-const ErrorText = styled.div`
-  text-align: center;
-  color: #EF4444;
-  font-size: 14px;
-  margin: 20px 0;
+  height: 300px;
+  
+  @media (max-width: 768px) {
+    height: 250px;
+  }
 `;
 
 const PopularProductsChart = () => {
-  const [timeRange, setTimeRange] = useState('weekly');
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [timeRange, setTimeRange] = useState('daily'); // 'daily' 또는 'weekly'
 
-  useEffect(() => {
-    fetchData();
-  }, [timeRange]);
+  // 라이카 제품 데이터
+  const products = [
+    'Leica Q3',
+    'Leica M11‑P',
+    'Leica D‑Lux8',
+    'Leica SL3',
+    'Leica M6'
+  ];
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      // 현재는 기존 API를 사용하고, 일간/주간에 따라 데이터를 조정
-      const response = await fetch('http://localhost:8080/api/today_best_products');
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const result = await response.json();
-      
-      if (result.status === 200 && result.weekly) {
-        // 일간/주간에 따라 데이터를 조정 (실제로는 다른 API를 호출해야 함)
-        const multiplier = timeRange === 'daily' ? 0.3 : 1.0; // 일간은 30%로 조정
-        
-        const chartData = {
-          labels: result.weekly.map(product => product.title),
-          datasets: [{
-            label: timeRange === 'daily' ? '일간 판매량' : '주간 판매량',
-            data: result.weekly.map(product => Math.round(product.cnt * multiplier)),
-            backgroundColor: '#8B5CF6',
-            borderColor: '#7C3AED',
-            borderWidth: 1,
-            borderRadius: 4,
-          }]
-        };
-        
-        setData(chartData);
-      } else {
-        throw new Error('Invalid data format');
-      }
-    } catch (err) {
-      console.error('API 호출 오류:', err);
-      setError('데이터를 불러오는 중 오류가 발생했습니다.');
-    } finally {
-      setLoading(false);
-    }
+  // 샘플 데이터
+  const dailyData = {
+    labels: products,
+    datasets: [
+      {
+        label: '일간 판매량',
+        data: [85, 72, 68, 65, 58],
+        backgroundColor: '#8B5CF6', // 보라색
+        borderColor: '#7C3AED',
+        borderWidth: 1,
+        borderRadius: 4,
+      },
+    ],
+  };
+
+  const weeklyData = {
+    labels: products,
+    datasets: [
+      {
+        label: '주간 판매량',
+        data: [420, 380, 350, 320, 290],
+        backgroundColor: '#8B5CF6', // 보라색
+        borderColor: '#7C3AED',
+        borderWidth: 1,
+        borderRadius: 4,
+      },
+    ],
   };
 
   const chartOptions = {
@@ -132,78 +123,63 @@ const PopularProductsChart = () => {
           usePointStyle: true,
           padding: 20,
           font: {
-            size: 12
-          }
-        }
+            size: 12,
+          },
+        },
       },
       title: {
-        display: false
-      }
+        display: false,
+      },
     },
     scales: {
       y: {
         beginAtZero: true,
         grid: {
-          color: '#f0f0f0'
+          color: '#f0f0f0',
         },
         ticks: {
           font: {
-            size: 12
-          }
-        }
+            size: 12,
+          },
+        },
       },
       x: {
         grid: {
-          display: false
+          display: false,
         },
         ticks: {
           font: {
-            size: 11
+            size: 11,
           },
-          maxRotation: 45
-        }
-      }
-    }
+          maxRotation: 45,
+        },
+      },
+    },
   };
 
-  if (loading) {
-    return (
-      <ChartContainer>
-        <ChartTitle>인기 제품 TOP5</ChartTitle>
-        <LoadingText>데이터를 불러오는 중...</LoadingText>
-      </ChartContainer>
-    );
-  }
-
-  if (error) {
-    return (
-      <ChartContainer>
-        <ChartTitle>인기 제품 TOP5</ChartTitle>
-        <ErrorText>{error}</ErrorText>
-        <ToggleButton onClick={fetchData}>다시 시도</ToggleButton>
-      </ChartContainer>
-    );
-  }
+  const currentData = timeRange === 'daily' ? dailyData : weeklyData;
 
   return (
     <ChartContainer>
       <ChartTitle>인기 제품 TOP5</ChartTitle>
+      
       <ToggleContainer>
-        <ToggleButton 
-          active={timeRange === 'daily'} 
+        <ToggleButton
+          active={timeRange === 'daily'}
           onClick={() => setTimeRange('daily')}
         >
           일간
         </ToggleButton>
-        <ToggleButton 
-          active={timeRange === 'weekly'} 
+        <ToggleButton
+          active={timeRange === 'weekly'}
           onClick={() => setTimeRange('weekly')}
         >
           주간
         </ToggleButton>
       </ToggleContainer>
+
       <ChartWrapper>
-        {data && <Bar data={data} options={chartOptions} />}
+        <Bar data={currentData} options={chartOptions} />
       </ChartWrapper>
     </ChartContainer>
   );

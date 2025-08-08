@@ -6,6 +6,8 @@ import styled from "styled-components";
 import Spinner from "../components/Spinner";
 
 import NewMember from "./NewMember";
+import Dashboard from "./Dashboard";
+import PopularProductsPage from "./PopularProductsPage";
 
 const PagesContainer = styled.div`
     /**영역 확인을 위한 임시 코드 */
@@ -19,6 +21,8 @@ const Pages = memo(() => {
     return (
         <PagesContainer>
             <NewMember />
+            <Dashboard />
+            <PopularProductsPage />
         </PagesContainer>
     );
 });
