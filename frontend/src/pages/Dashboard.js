@@ -4,12 +4,6 @@ import PopularProductsChart from '../components/PopularProductsChart';
 import Graph1 from './Graph1';
 import Graph2 from './Graph2';
 
-// 이미지 import
-import leicaQ3 from '../images/products/leica-q3.jpg';
-import leicaM11P from '../images/products/leica-m11p.jpg';
-import leicaDLux8 from '../images/products/leica-dlux8.jpg';
-import leicaSL3 from '../images/products/leica-sl3.jpg';
-
 const DashboardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -500,7 +494,7 @@ export default function Dashboard() {
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
                   <img 
-                    src={leicaQ3} 
+                    src="/images/products/leica-q3.jpg" 
                     alt="Leica Q3" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
@@ -526,7 +520,7 @@ export default function Dashboard() {
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
                   <img 
-                    src={leicaM11P} 
+                    src="/images/products/leica-m11p.jpg" 
                     alt="Leica M11-P" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
@@ -552,7 +546,7 @@ export default function Dashboard() {
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
                   <img 
-                    src={leicaDLux8} 
+                    src="/images/products/leica-dlux8.jpg" 
                     alt="Leica D-Lux8" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
@@ -578,7 +572,7 @@ export default function Dashboard() {
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
                   <img 
-                    src={leicaSL3} 
+                    src="/images/products/leica-sl3.jpg" 
                     alt="Leica SL3" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
