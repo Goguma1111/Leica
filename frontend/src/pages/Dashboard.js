@@ -493,8 +493,9 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
+
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/products/leica-q3.jpg`}
+                    src="/images/products/leica-q3.jpg"
                     alt="Leica Q3"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {
@@ -523,8 +524,9 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
+
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/products/leica-m11p.jpg`}
+                    src="/images/products/leica-m11p.jpg"
                     alt="Leica M11-P"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {
@@ -553,8 +555,9 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
+
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/products/leica-dlux8.jpg`}
+                    src="/images/products/leica-dlux8.jpg"
                     alt="Leica D-Lux8"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {
@@ -584,8 +587,9 @@ export default function Dashboard() {
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/products/leica-sl3.jpg`}
+                    src="/images/products/leica-sl3.jpg"
                     alt="Leica SL3"
+
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {
                       console.error('이미지 로드 실패:', e.target.src);
