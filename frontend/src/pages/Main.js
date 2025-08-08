@@ -7,27 +7,31 @@ import Spinner from "../components/Spinner";
 import NewMember from "./NewMember";
 import Dashboard from "./Dashboard";
 import PopularProductsPage from "./PopularProductsPage";
+import PopularProductsChart from "../components/PopularProductsChart";
 
 const PagesContainer = styled.div`
     /**영역 확인을 위한 임시 코드 */
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 20px;
+    padding: 20px;
 `;
 
 const NavigationLink = styled(Link)`
     display: inline-block;
-    padding: 12px 24px;
+    padding: 8px 16px;
     background: #3b82f6;
     color: white;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 6px;
     font-weight: 500;
+    font-size: 14px;
     transition: all 0.2s ease;
-    
+    width: fit-content;
+
     &:hover {
         background: #2563eb;
-        transform: translateY(-2px);
+        transform: translateY(-1px);
     }
 `;
 
@@ -38,6 +42,7 @@ const Pages = memo(() => {
             <NewMember />
             <Dashboard />
             <PopularProductsPage />
+            <PopularProductsChart />
         </PagesContainer>
     );
 });
