@@ -63,7 +63,7 @@ const TotalSales = memo(() => {
     daily: {
         labels: ['8/1', '8/2', '8/3', '8/4', '8/5', '8/6', '8/7'],
         datasets: [{
-        label: '일간 총 매출',
+        label: '일간 매출',
         data: [3200000, 3000000, 3100000, 3500000, 2800000, 2900000, 3600000],
         backgroundColor: 'rgba(198, 204, 182, 0.7)',
         borderColor: 'rgb(159, 170, 130)',
@@ -72,10 +72,10 @@ const TotalSales = memo(() => {
     },
 
     weekly: {
-      labels: ['7월 1주', '7월 2주', '7월 3주', '7월 4주', '8월 1주'],
+      labels: ['7월 1주', '7월 2주', '7월 3주', '7월 4주'],
       datasets: [{
-        label: '주간 총 매출',
-        data: [220000000, 210000000, 250000000, 200000000, 230000000],
+        label: '주간 매출',
+        data: [220000000, 210000000, 250000000, 200000000],
         backgroundColor: 'rgba(198, 204, 182, 0.7)',
         borderColor: 'rgb(159, 170, 130)',
         borderWidth: 1,
@@ -94,7 +94,7 @@ const TotalSales = memo(() => {
       </div>
 
       <div className="chart-item">
-        <h2>{change === 'daily' ? '일간 총 매출' : '주간 총 매출'}</h2>
+        <h2>{change === 'daily' ? '일간 매출' : '주간 매출'}</h2>
         <Bar
           options={{
             responsive: true,

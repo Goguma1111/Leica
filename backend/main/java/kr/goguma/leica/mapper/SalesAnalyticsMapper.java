@@ -7,8 +7,8 @@ import java.util.Map;
 
 @Mapper
 public interface SalesAnalyticsMapper {
-    
+
     List<Map<String, Object>> getProductSalesDistribution();
-    
+
     List<Map<String, Object>> getHourlySalesPattern();
-} 
+}

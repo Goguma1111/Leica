@@ -1,4 +1,4 @@
-package kr.goguma.leica.soppha.helpers;
+package kr.goguma.leica.helpers;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
