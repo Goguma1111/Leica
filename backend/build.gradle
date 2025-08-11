@@ -26,6 +26,18 @@ repositories {
 	mavenCentral()
 }
 
+// 비표준 디렉터리 구조를 Gradle에 매핑
+sourceSets {
+	main {
+		java.srcDirs = ['main/java']
+		resources.srcDirs = ['main/resources']
+	}
+	test {
+		java.srcDirs = ['test/java']
+		resources.srcDirs = ['test/resources']
+	}
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -50,10 +62,10 @@ tasks.named('test') {
 }
 
 
-// ⭐⭐⭐ React 프로젝트 통합 설정 ⭐⭐⭐
+// ⭐⭐⭐ React 프로젝트 통합 설정 (분리 실행 가능하도록 수정) ⭐⭐⭐
 
-// React 프로젝트 경로 설정
-def frontendDir = file("leica")
+// React 프로젝트 경로 설정 (모노레포의 frontend 폴더)
+def frontendDir = file("../frontend")
 
 // Node.js 설정
 node {
@@ -63,7 +75,7 @@ node {
    nodeProjectDir = frontendDir
 }
 
-// 🔥 개발 환경: SpringBoot 실행 시 React 개발 서버도 함께 실행
+// 🔥 개발 환경: 필요 시 수동으로 실행 (bootRun과 강결합 제거)
 task startReactDev(type: YarnTask) {
     dependsOn yarn
     yarnCommand = ['start']
@@ -75,14 +87,14 @@ task buildReact(type: YarnTask) {
     yarnCommand = ['build']
 }
 
+// bootRun이 React dev 서버를 강제로 띄우지 않도록 의존 제거
 bootRun {
-   dependsOn startReactDev
 }
 
 task copyReactBuild(type: Copy) {
    dependsOn buildReact
    from "${frontendDir}/build"
-   into "src/main/resources/static"
+   into "main/resources/static"
 }
 
 // 📦 Spring Boot jar 빌드 시 React도 함께 빌드

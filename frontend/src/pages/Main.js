@@ -28,6 +28,7 @@ const NavigationLink = styled(Link)`
     transition: all 0.2s ease;
     width: fit-content;
 
+
     &:hover {
         background: #2563eb;
         transform: translateY(-1px);
@@ -37,7 +38,6 @@ const NavigationLink = styled(Link)`
 const Pages = memo(() => {
     return (
         <PagesContainer>
-            <NavigationLink to="/dashboard">대시보드</NavigationLink>
             <NewMember />
             <PopularProductsChart />
             <TotalSales />

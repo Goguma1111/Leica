@@ -39,15 +39,15 @@ const ToggleContainer = styled.div`
 const ToggleButton = styled.button`
   padding: 8px 16px;
   border: 1px solid #e5e7eb;
-  background: ${props => props.active ? '#8B5CF6' : 'white'};
-  color: ${props => props.active ? 'white' : '#6B7280'};
+  background: ${props => props.$active ? '#8B5CF6' : 'white'};
+  color: ${props => props.$active ? 'white' : '#6B7280'};
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
   transition: all 0.2s;
-  
+
   &:hover {
-    background: ${props => props.active ? '#7C3AED' : '#F9FAFB'};
+    background: ${props => props.$active ? '#7C3AED' : '#F9FAFB'};
   }
 `;
 
@@ -84,20 +84,19 @@ const PopularProductsChart = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // 현재는 기존 API를 사용하고, 일간/주간에 따라 데이터를 조정
-      const response = await fetch('http://localhost:8080/api/today_best_products');
-      
+      const response = await fetch('/api/today_best_products');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const result = await response.json();
-      
+
       if (result.status === 200 && result.weekly) {
         // 일간/주간에 따라 데이터를 조정 (실제로는 다른 API를 호출해야 함)
         const multiplier = timeRange === 'daily' ? 0.3 : 1.0; // 일간은 30%로 조정
-        
+
         const chartData = {
           labels: result.weekly.map(product => product.title),
           datasets: [{
@@ -109,7 +108,7 @@ const PopularProductsChart = () => {
             borderRadius: 4,
           }]
         };
-        
+
         setData(chartData);
       } else {
         throw new Error('Invalid data format');
@@ -203,13 +202,13 @@ const PopularProductsChart = () => {
       <ChartTitle>인기 제품 TOP5</ChartTitle>
       <ToggleContainer>
         <ToggleButton 
-          active={timeRange === 'daily'} 
+          $active={timeRange === 'daily'} 
           onClick={() => setTimeRange('daily')}
         >
           일간
         </ToggleButton>
         <ToggleButton 
-          active={timeRange === 'weekly'} 
+          $active={timeRange === 'weekly'} 
           onClick={() => setTimeRange('weekly')}
         >
           주간
@@ -222,4 +221,4 @@ const PopularProductsChart = () => {
   );
 };
 
-export default PopularProductsChart; 
+export default PopularProductsChart;
