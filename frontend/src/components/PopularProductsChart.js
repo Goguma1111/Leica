@@ -39,15 +39,15 @@ const ToggleContainer = styled.div`
 const ToggleButton = styled.button`
   padding: 8px 16px;
   border: 1px solid #e5e7eb;
-  background: ${props => props.active ? '#8B5CF6' : 'white'};
-  color: ${props => props.active ? 'white' : '#6B7280'};
+  background: ${props => props.$active ? '#8B5CF6' : 'white'};
+  color: ${props => props.$active ? 'white' : '#6B7280'};
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
   transition: all 0.2s;
   
   &:hover {
-    background: ${props => props.active ? '#7C3AED' : '#F9FAFB'};
+    background: ${props => props.$active ? '#7C3AED' : '#F9FAFB'};
   }
 `;
 
@@ -86,7 +86,7 @@ const PopularProductsChart = () => {
       setError(null);
       
       // 현재는 기존 API를 사용하고, 일간/주간에 따라 데이터를 조정
-      const response = await fetch('http://localhost:8080/api/today_best_products');
+      const response = await fetch('/api/today_best_products');
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -203,13 +203,13 @@ const PopularProductsChart = () => {
       <ChartTitle>인기 제품 TOP5</ChartTitle>
       <ToggleContainer>
         <ToggleButton 
-          active={timeRange === 'daily'} 
+          $active={timeRange === 'daily'} 
           onClick={() => setTimeRange('daily')}
         >
           일간
         </ToggleButton>
         <ToggleButton 
-          active={timeRange === 'weekly'} 
+          $active={timeRange === 'weekly'} 
           onClick={() => setTimeRange('weekly')}
         >
           주간

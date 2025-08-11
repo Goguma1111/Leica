@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.goguma.leica.mapper.SalesAnalyticsMapper">
+
+    <!-- 제품별 판매량 분포 조회 -->
+    <select id="getProductSalesDistribution" resultType="java.util.Map">
+        SELECT 
+            product_name AS "productName",
+            SUM(quantity) AS "totalQuantity",
+            COUNT(*) AS "orderCount"
+        FROM sales 
+        GROUP BY product_name 
+        ORDER BY "totalQuantity" DESC
+    </select>
+
+    <!-- 시간대별 판매 패턴 조회 -->
+    <select id="getHourlySalesPattern" resultType="java.util.Map">
+        SELECT 
+            EXTRACT(HOUR FROM sale_date) AS "hour",
+            SUM(quantity) AS "totalQuantity",
+            COUNT(*) AS "orderCount"
+        FROM sales 
+        GROUP BY EXTRACT(HOUR FROM sale_date)
+        ORDER BY "hour" ASC
+    </select>
+
+</mapper> 

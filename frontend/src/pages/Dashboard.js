@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PopularProductsChart from '../components/PopularProductsChart';
+import ProductSalesChart from '../components/ProductSalesChart';
+import HourlySalesChart from '../components/HourlySalesChart';
 import Graph1 from './Graph1';
 import Graph2 from './Graph2';
 
@@ -31,18 +33,10 @@ const DashboardContainer = styled.div`
 
 const MetricsSection = styled.div`
   grid-column: span 12;
-  
-  @media (min-width: 1280px) {
-    grid-column: span 7;
-  }
 `;
 
 const TargetSection = styled.div`
-  grid-column: span 12;
-  
-  @media (min-width: 1280px) {
-    grid-column: span 5;
-  }
+  display: none;
 `;
 
 const StatisticsSection = styled.div`
@@ -403,80 +397,11 @@ export default function Dashboard() {
         </div>
       </MetricsSection>
 
-      <TargetSection>
-        <TargetCard>
-          <TargetTitle>주간 목표</TargetTitle>
-          <div style={{ marginBottom: '1rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>매출 목표</span>
-              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>75%</span>
-            </div>
-            <ProgressBar>
-              <ProgressFill percentage={75} />
-            </ProgressBar>
-          </div>
-          
-          <div style={{ marginBottom: '1rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>주문 목표</span>
-              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>60%</span>
-            </div>
-            <ProgressBar>
-              <ProgressFill percentage={60} />
-            </ProgressBar>
-          </div>
-          
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>고객 목표</span>
-              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>85%</span>
-            </div>
-            <ProgressBar>
-              <ProgressFill percentage={85} />
-            </ProgressBar>
-          </div>
-        </TargetCard>
-      </TargetSection>
-
       <StatisticsSection>
         <Graph2 />
       </StatisticsSection>
 
-      <DemographicSection>
-        <DemographicCard>
-          <TargetTitle>고객 통계</TargetTitle>
-          <div style={{ marginBottom: '1rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>20-30대</span>
-              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>45%</span>
-            </div>
-            <ProgressBar>
-              <ProgressFill percentage={45} />
-            </ProgressBar>
-          </div>
-          
-          <div style={{ marginBottom: '1rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>30-40대</span>
-              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>35%</span>
-            </div>
-            <ProgressBar>
-              <ProgressFill percentage={35} />
-            </ProgressBar>
-          </div>
-          
-          <div style={{ marginBottom: '1rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>40-50대</span>
-              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>20%</span>
-            </div>
-            <ProgressBar>
-              <ProgressFill percentage={20} />
-            </ProgressBar>
-          </div>
-        </DemographicCard>
-      </DemographicSection>
-
+      
       <OrdersSection>
         <OrdersCard>
           <OrdersTitle>최근 주문</OrdersTitle>
@@ -494,9 +419,13 @@ export default function Dashboard() {
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
                   <img 
-                    src="/images/products/leica-q3.jpg" 
+                    src={`${process.env.PUBLIC_URL}/images/products/leica-q3.jpg`} 
                     alt="Leica Q3" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      console.error('이미지 로드 실패:', e.target.src);
+                      e.target.style.display = 'none';
+                    }}
                   />
                 </ProductImage>
                 <ProductName>Leica Q3</ProductName>
@@ -520,9 +449,13 @@ export default function Dashboard() {
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
                   <img 
-                    src="/images/products/leica-m11p.jpg" 
+                    src={`${process.env.PUBLIC_URL}/images/products/leica-m11p.jpg`} 
                     alt="Leica M11-P" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      console.error('이미지 로드 실패:', e.target.src);
+                      e.target.style.display = 'none';
+                    }}
                   />
                 </ProductImage>
                 <ProductName>Leica M11-P</ProductName>
@@ -546,9 +479,13 @@ export default function Dashboard() {
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
                   <img 
-                    src="/images/products/leica-dlux8.jpg" 
+                    src={`${process.env.PUBLIC_URL}/images/products/leica-dlux8.jpg`} 
                     alt="Leica D-Lux8" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      console.error('이미지 로드 실패:', e.target.src);
+                      e.target.style.display = 'none';
+                    }}
                   />
                 </ProductImage>
                 <ProductName>Leica D-Lux8</ProductName>
@@ -572,9 +509,13 @@ export default function Dashboard() {
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
                   <img 
-                    src="/images/products/leica-sl3.jpg" 
+                    src={`${process.env.PUBLIC_URL}/images/products/leica-sl3.jpg`} 
                     alt="Leica SL3" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      console.error('이미지 로드 실패:', e.target.src);
+                      e.target.style.display = 'none';
+                    }}
                   />
                 </ProductImage>
                 <ProductName>Leica SL3</ProductName>
@@ -594,6 +535,26 @@ export default function Dashboard() {
         animationFillMode: 'both'
       }}>
         <PopularProductsChart />
+      </div>
+      
+      <div style={{ 
+        gridColumn: 'span 12', 
+        marginTop: '1.5rem',
+        animation: 'fadeInUp 0.8s ease-out',
+        animationDelay: '1.8s',
+        animationFillMode: 'both'
+      }}>
+        <ProductSalesChart />
+      </div>
+      
+      <div style={{ 
+        gridColumn: 'span 12', 
+        marginTop: '1.5rem',
+        animation: 'fadeInUp 0.8s ease-out',
+        animationDelay: '2.1s',
+        animationFillMode: 'both'
+      }}>
+        <HourlySalesChart />
       </div>
     </DashboardContainer>
   );
