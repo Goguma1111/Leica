@@ -1,3 +1,20 @@
-public class MemberService {
+package kr.goguma.leica.soppha.services;
+
+import java.util.List;
+import java.util.Map;
+import org.apache.ibatis.annotations.Mapper;
+import kr.goguma.leica.soppha.models.NewMember;
+
+
+public interface MemberService {
+
+    /** 일별 가입자 수 */
+    List<NewMember> getDailyNewMembers();
+
+    /** 주간 가입자 수  */
+    List<NewMember> getWeeklyNewMembers();
+
+    Map<String, Object> sendJson();
+
 
 }
