@@ -6,7 +6,6 @@ import GlobalStyle from './components/GlobalStyles';
 
 
 import Main from './pages/Main';
-import Dashboard from './pages/Dashboard';
 import PopularProductsPage from './pages/PopularProductsPage';
 
 const  App = memo(() => {
@@ -19,7 +18,6 @@ const  App = memo(() => {
 
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/popular-products" element={<PopularProductsPage />} />
         </Routes>
     </>
