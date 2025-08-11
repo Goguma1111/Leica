@@ -5,7 +5,8 @@ import styled from "styled-components";
 /**컴포넌트 참조 */
 import Spinner from "../components/Spinner";
 import NewMember from "./NewMember";
-import PopularProductsPage from "./PopularProductsPage";
+import PopularProductsChart from "../components/PopularProductsChart";
+import TotalSales from "./TotalSales";
 
 const PagesContainer = styled.div`
     /**영역 확인을 위한 임시 코드 */
@@ -27,6 +28,7 @@ const NavigationLink = styled(Link)`
     transition: all 0.2s ease;
     width: fit-content;
 
+
     &:hover {
         background: #2563eb;
         transform: translateY(-1px);
@@ -37,7 +39,8 @@ const Pages = memo(() => {
     return (
         <PagesContainer>
             <NewMember />
-            <PopularProductsPage />
+            <PopularProductsChart />
+            <TotalSales />
         </PagesContainer>
     );
 });
