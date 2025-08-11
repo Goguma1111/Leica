@@ -5,6 +5,8 @@ import styled from "styled-components";
 /**컴포넌트 참조 */
 import Spinner from "../components/Spinner";
 import NewMember from "./NewMember";
+import Dashboard from "./Dashboard";
+import PopularProductsPage from "./PopularProductsPage";
 import PopularProductsChart from "../components/PopularProductsChart";
 
 const PagesContainer = styled.div`
@@ -26,7 +28,7 @@ const NavigationLink = styled(Link)`
     font-size: 14px;
     transition: all 0.2s ease;
     width: fit-content;
-    
+
     &:hover {
         background: #2563eb;
         transform: translateY(-1px);
@@ -38,6 +40,8 @@ const Pages = memo(() => {
         <PagesContainer>
             <NavigationLink to="/dashboard">대시보드</NavigationLink>
             <NewMember />
+            <Dashboard />
+            <PopularProductsPage />
             <PopularProductsChart />
         </PagesContainer>
     );

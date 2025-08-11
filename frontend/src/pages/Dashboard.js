@@ -11,14 +11,14 @@ const DashboardContainer = styled.div`
   grid-template-columns: repeat(12, 1fr);
   gap: 1rem;
   padding: 1rem;
-  
+
   @media (min-width: 768px) {
     gap: 1.5rem;
   }
-  
+
   /* 페이지 로드 애니메이션 */
   animation: fadeInUp 0.8s ease-out;
-  
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -33,10 +33,25 @@ const DashboardContainer = styled.div`
 
 const MetricsSection = styled.div`
   grid-column: span 12;
+<<<<<<< HEAD
 `;
 
 const TargetSection = styled.div`
   display: none;
+=======
+
+  @media (min-width: 1280px) {
+    grid-column: span 7;
+  }
+`;
+
+const TargetSection = styled.div`
+  grid-column: span 12;
+
+  @media (min-width: 1280px) {
+    grid-column: span 5;
+  }
+>>>>>>> origin/main
 `;
 
 const StatisticsSection = styled.div`
@@ -45,7 +60,7 @@ const StatisticsSection = styled.div`
 
 const DemographicSection = styled.div`
   grid-column: span 12;
-  
+
   @media (min-width: 1280px) {
     grid-column: span 5;
   }
@@ -53,7 +68,7 @@ const DemographicSection = styled.div`
 
 const OrdersSection = styled.div`
   grid-column: span 12;
-  
+
   @media (min-width: 1280px) {
     grid-column: span 7;
   }
@@ -67,17 +82,17 @@ const MetricCard = styled.div`
   margin-bottom: 1rem;
   transition: all 0.3s ease;
   cursor: pointer;
-  
+
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
-  
+
   /* 순차적 등장 애니메이션 */
   animation: slideInLeft 0.6s ease-out;
   animation-delay: ${props => props.delay || '0s'};
   animation-fill-mode: both;
-  
+
   @keyframes slideInLeft {
     from {
       opacity: 0;
@@ -115,17 +130,17 @@ const TargetCard = styled.div`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   height: fit-content;
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   }
-  
+
   /* 우측에서 등장 애니메이션 */
   animation: slideInRight 0.6s ease-out;
   animation-delay: 0.3s;
   animation-fill-mode: both;
-  
+
   @keyframes slideInRight {
     from {
       opacity: 0;
@@ -162,7 +177,7 @@ const ProgressFill = styled.div`
   animation: progressFill 1.5s ease-out;
   animation-delay: 0.8s;
   animation-fill-mode: both;
-  
+
   @keyframes progressFill {
     from {
       width: 0%;
@@ -180,17 +195,17 @@ const DemographicCard = styled.div`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   height: fit-content;
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   }
-  
+
   /* 아래에서 등장 애니메이션 */
   animation: slideInUp 0.6s ease-out;
   animation-delay: 0.6s;
   animation-fill-mode: both;
-  
+
   @keyframes slideInUp {
     from {
       opacity: 0;
@@ -224,23 +239,23 @@ const OrderItem = styled.div`
   padding: 0.75rem 0;
   border-bottom: 1px solid #f3f4f6;
   transition: all 0.2s ease;
-  
+
   &:last-child {
     border-bottom: none;
   }
-  
+
   &:hover {
     background: #f9fafb;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     border-radius: 6px;
   }
-  
+
   /* 순차적 등장 애니메이션 */
   animation: fadeIn 0.4s ease-out;
   animation-delay: ${props => (props.index * 0.1) + 1.2}s;
   animation-fill-mode: both;
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -315,7 +330,7 @@ const ProductImage = styled.div`
   color: #6b7280;
   overflow: hidden;
   flex-shrink: 0;
-  
+
   img {
     width: 100%;
     height: 100%;
@@ -372,36 +387,112 @@ export default function Dashboard() {
             <MetricValue>₩24,500,000</MetricValue>
             <MetricChange positive>+2.5%</MetricChange>
           </MetricCard>
-          
+
           <MetricCard delay="0.2s">
             <MetricTitle>총 주문</MetricTitle>
             <MetricValue>234</MetricValue>
             <MetricChange positive>+12.3%</MetricChange>
           </MetricCard>
-          
+
           <MetricCard delay="0.3s">
             <MetricTitle>평균 주문 가격</MetricTitle>
             <MetricValue>₩1,985,000</MetricValue>
             <MetricChange positive>+8.1%</MetricChange>
           </MetricCard>
-          
+
           <MetricCard delay="0.4s">
             <MetricTitle>신규 고객</MetricTitle>
             <MetricValue>89</MetricValue>
             <MetricChange>+5.2%</MetricChange>
           </MetricCard>
         </div>
-        
+
         <div style={{ marginTop: '1.5rem' }}>
           <Graph1 />
         </div>
       </MetricsSection>
 
+<<<<<<< HEAD
+=======
+      <TargetSection>
+        <TargetCard>
+          <TargetTitle>주간 목표</TargetTitle>
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>매출 목표</span>
+              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>75%</span>
+            </div>
+            <ProgressBar>
+              <ProgressFill percentage={75} />
+            </ProgressBar>
+          </div>
+
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>주문 목표</span>
+              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>60%</span>
+            </div>
+            <ProgressBar>
+              <ProgressFill percentage={60} />
+            </ProgressBar>
+          </div>
+
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>고객 목표</span>
+              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>85%</span>
+            </div>
+            <ProgressBar>
+              <ProgressFill percentage={85} />
+            </ProgressBar>
+          </div>
+        </TargetCard>
+      </TargetSection>
+
+>>>>>>> origin/main
       <StatisticsSection>
         <Graph2 />
       </StatisticsSection>
 
+<<<<<<< HEAD
       
+=======
+      <DemographicSection>
+        <DemographicCard>
+          <TargetTitle>고객 통계</TargetTitle>
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>20-30대</span>
+              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>45%</span>
+            </div>
+            <ProgressBar>
+              <ProgressFill percentage={45} />
+            </ProgressBar>
+          </div>
+
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>30-40대</span>
+              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>35%</span>
+            </div>
+            <ProgressBar>
+              <ProgressFill percentage={35} />
+            </ProgressBar>
+          </div>
+
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>40-50대</span>
+              <span style={{ fontSize: '0.875rem', fontWeight: '600' }}>20%</span>
+            </div>
+            <ProgressBar>
+              <ProgressFill percentage={20} />
+            </ProgressBar>
+          </div>
+        </DemographicCard>
+      </DemographicSection>
+
+>>>>>>> origin/main
       <OrdersSection>
         <OrdersCard>
           <OrdersTitle>최근 주문</OrdersTitle>
@@ -418,9 +509,16 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
+<<<<<<< HEAD
                   <img 
                     src={`${process.env.PUBLIC_URL}/images/products/leica-q3.jpg`} 
                     alt="Leica Q3" 
+=======
+
+                  <img
+                    src="/images/products/leica-q3.jpg"
+                    alt="Leica Q3"
+>>>>>>> origin/main
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {
                       console.error('이미지 로드 실패:', e.target.src);
@@ -434,7 +532,7 @@ export default function Dashboard() {
             <OrderAmount>₩2,500,000</OrderAmount>
             <StatusTag status="pending">배송 준비중</StatusTag>
           </OrderItem>
-          
+
           <OrderItem index={1}>
             <OrderInfo>
               <CustomerSection>
@@ -448,9 +546,16 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
+<<<<<<< HEAD
                   <img 
                     src={`${process.env.PUBLIC_URL}/images/products/leica-m11p.jpg`} 
                     alt="Leica M11-P" 
+=======
+
+                  <img
+                    src="/images/products/leica-m11p.jpg"
+                    alt="Leica M11-P"
+>>>>>>> origin/main
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {
                       console.error('이미지 로드 실패:', e.target.src);
@@ -464,7 +569,7 @@ export default function Dashboard() {
             <OrderAmount>₩1,800,000</OrderAmount>
             <StatusTag status="delivered">배송완료</StatusTag>
           </OrderItem>
-          
+
           <OrderItem index={2}>
             <OrderInfo>
               <CustomerSection>
@@ -478,9 +583,16 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
+<<<<<<< HEAD
                   <img 
                     src={`${process.env.PUBLIC_URL}/images/products/leica-dlux8.jpg`} 
                     alt="Leica D-Lux8" 
+=======
+
+                  <img
+                    src="/images/products/leica-dlux8.jpg"
+                    alt="Leica D-Lux8"
+>>>>>>> origin/main
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {
                       console.error('이미지 로드 실패:', e.target.src);
@@ -494,7 +606,7 @@ export default function Dashboard() {
             <OrderAmount>₩3,200,000</OrderAmount>
             <StatusTag status="delivered">배송완료</StatusTag>
           </OrderItem>
-          
+
           <OrderItem index={3}>
             <OrderInfo>
               <CustomerSection>
@@ -508,9 +620,16 @@ export default function Dashboard() {
               </CustomerSection>
               <ProductSection>
                 <ProductImage bgColor="#f3f4f6">
+<<<<<<< HEAD
                   <img 
                     src={`${process.env.PUBLIC_URL}/images/products/leica-sl3.jpg`} 
                     alt="Leica SL3" 
+=======
+                  <img
+                    src="/images/products/leica-sl3.jpg"
+                    alt="Leica SL3"
+
+>>>>>>> origin/main
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {
                       console.error('이미지 로드 실패:', e.target.src);
@@ -526,9 +645,9 @@ export default function Dashboard() {
           </OrderItem>
         </OrdersCard>
       </OrdersSection>
-      
-      <div style={{ 
-        gridColumn: 'span 12', 
+
+      <div style={{
+        gridColumn: 'span 12',
         marginTop: '1.5rem',
         animation: 'fadeInUp 0.8s ease-out',
         animationDelay: '1.5s',
