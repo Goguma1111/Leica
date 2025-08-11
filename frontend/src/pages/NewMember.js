@@ -8,7 +8,7 @@
  * yarn add chart.js react-chartjs-2
  */
 
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 import {
     //공통항목들
@@ -50,21 +50,49 @@ Chart.register(
 );
 
 const ChartContainer = styled.div`
+    width: 100%;
+    margin-bottom: 100px;
+
     .chart-wrapper {
         display: flex;
         flex-wrap: wrap;
+        width: 100%;
 
         /**그래프의 크기를 제어하는 역할 */
         .chart-item {
-            max-width: 100%;
+            width: 100%;
             padding: 20px;
             box-sizing: border-box;
             height: 400px;
+            flex: 1;
+
+            .chart-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px;
+
+                h3 {
+                    margin-right: 20px;
+                }
+
+                #viewType {
+                    display: block;
+                    width: 192px;
+                    padding: 8px 12px;
+                    border: 1px solid #d1d5db;
+                    border-radius: 6px;
+                    font-size: 14px;
+                    background-color: white;
+                    cursor: pointer;
+                }
+            }
         }
     }
 `;
 
 const ChartEx = memo(() => {
+    const [viewType, setViewType] = useState("daily");
+
     return (
         <ChartContainer>
             <h2>Chart</h2>
@@ -73,22 +101,34 @@ const ChartEx = memo(() => {
             <div className="chart-wrapper">
                 {/** 선 그래프 */}
                 <div className="chart-item">
-                    <h3>선 그래프</h3>
+                    <div className="chart-header">
+                        <h3>날짜별 신규 회원 수</h3>
+                        <select id="viewType" value={viewType} onChange={(e) => setViewType(e.target.value)}>
+                            <option value="daily">일간</option>
+                            <option value="weekly">주간</option>
+                        </select>
+                    </div>
+                     {/* 조건부 렌더링 */}
+                    <h3>{viewType === "daily" ? "일간" : "주간"}</h3>
+
+
                     <Line
                         options={{
                             responsive: true, //반응형 기능 사용
-                            maintainAspectRatio: true, //세로 높이를 스스로 설정(false인 경우 부모에 맞춤)
+                            maintainAspectRatio: false, //세로 높이를 스스로 설정(false인 경우 부모에 맞춤)
                             plugins: {
                                 legend: {
                                     position: "bottom", //범주의 위치
                                 },
                             },
                         }}
-                        data={{
+                        data={
+                            viewType === "daily"
+                            ? {
                             labels: ["06/18", "06/19", "06/20", "06/21", "06/22", "06/23", "06/24"], //x축
                             datasets: [
                                 {
-                                    label: "가입자 수",
+                                    label: "일간별 가입자 수",
                                     data: [1237, 1108, 719, 2042, 1775, 1580, 1605],
                                     backgroundColor: "rgba(255, 99, 132, 0.5)",
                                     borderColor: "rgba(255, 99, 132, 1)",
@@ -96,6 +136,20 @@ const ChartEx = memo(() => {
                                 },
 
                             ],
+                        }
+                        : {
+                             labels: ["06/18", "06/19", "06/20", "06/21", "06/22", "06/23", "06/24"], //x축
+                            datasets: [
+                                {
+                                    label: "주간별 가입자 수",
+                                    data: [2000, 1108, 719, 2042, 1775, 1580, 1605],
+                                    backgroundColor: "rgba(255, 99, 132, 0.5)",
+                                    borderColor: "rgba(255, 99, 132, 1)",
+                                    borderWidth: 1,
+                                },
+
+                            ],
+
                         }}
                     />
                 </div>

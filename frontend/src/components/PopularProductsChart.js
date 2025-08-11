@@ -45,7 +45,7 @@ const ToggleButton = styled.button`
   cursor: pointer;
   font-size: 14px;
   transition: all 0.2s;
-  
+
   &:hover {
     background: ${props => props.$active ? '#7C3AED' : '#F9FAFB'};
   }
@@ -84,20 +84,19 @@ const PopularProductsChart = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // 현재는 기존 API를 사용하고, 일간/주간에 따라 데이터를 조정
       const response = await fetch('/api/today_best_products');
-      
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const result = await response.json();
-      
+
       if (result.status === 200 && result.weekly) {
         // 일간/주간에 따라 데이터를 조정 (실제로는 다른 API를 호출해야 함)
         const multiplier = timeRange === 'daily' ? 0.3 : 1.0; // 일간은 30%로 조정
-        
+
         const chartData = {
           labels: result.weekly.map(product => product.title),
           datasets: [{
@@ -109,7 +108,7 @@ const PopularProductsChart = () => {
             borderRadius: 4,
           }]
         };
-        
+
         setData(chartData);
       } else {
         throw new Error('Invalid data format');
@@ -222,4 +221,4 @@ const PopularProductsChart = () => {
   );
 };
 
-export default PopularProductsChart; 
+export default PopularProductsChart;

@@ -1,19 +1,29 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { memo } from 'react';
+
+
+import {Route, Routes} from 'react-router-dom';
+import GlobalStyle from './components/GlobalStyles';
+
+
 import Main from './pages/Main';
 import Dashboard from './pages/Dashboard';
-import NewMember from './pages/NewMember';
+import PopularProductsPage from './pages/PopularProductsPage';
 
-function App() {
+const  App = memo(() => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/new-member" element={<NewMember />} />
-      </Routes>
-    </Router>
-  );
-}
+    <>
+        <GlobalStyle />
+        <h1>Leica</h1>
+        <hr />
 
-export default App; 
+
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/popular-products" element={<PopularProductsPage />} />
+        </Routes>
+    </>
+  );
+});
+
+export default App;
