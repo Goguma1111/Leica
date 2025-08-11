@@ -51,6 +51,7 @@ Chart.register(
 
 const ChartContainer = styled.div`
     width: 100%;
+    margin-bottom: 100px;
 
     .chart-wrapper {
         display: flex;
@@ -64,6 +65,27 @@ const ChartContainer = styled.div`
             box-sizing: border-box;
             height: 400px;
             flex: 1;
+
+            .chart-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px;
+
+                h3 {
+                    margin-right: 20px;
+                }
+
+                #viewType {
+                    display: block;
+                    width: 192px;
+                    padding: 8px 12px;
+                    border: 1px solid #d1d5db;
+                    border-radius: 6px;
+                    font-size: 14px;
+                    background-color: white;
+                    cursor: pointer;
+                }
+            }
         }
     }
 `;
@@ -79,24 +101,17 @@ const ChartEx = memo(() => {
             <div className="chart-wrapper">
                 {/** 선 그래프 */}
                 <div className="chart-item">
-                    <h3>선 그래프</h3>
-                    <select
-                        id="viewType"
-                        value={viewType}
-                        onChange={(e) => setViewType(e.target.value)}
-                        style={{
-                            display: "block",
-                            width: "192px",
-                            padding: "8px 12px",
-                            border: "1px solid #d1d5db",
-                            borderRadius: "6px",
-                            fontSize: "14px",
-                            backgroundColor: "white",
-                            cursor: "pointer",
-                        }}>
-                        <option value="daily">일간별</option>
-                        <option value="weekly">주간별</option>
-                    </select>
+                    <div className="chart-header">
+                        <h3>날짜별 신규 회원 수</h3>
+                        <select id="viewType" value={viewType} onChange={(e) => setViewType(e.target.value)}>
+                            <option value="daily">일간</option>
+                            <option value="weekly">주간</option>
+                        </select>
+                    </div>
+                     {/* 조건부 렌더링 */}
+                    <h3>{viewType === "daily" ? "일간" : "주간"}</h3>
+
+
                     <Line
                         options={{
                             responsive: true, //반응형 기능 사용
@@ -107,24 +122,34 @@ const ChartEx = memo(() => {
                                 },
                             },
                         }}
-                        data={{
+                        data={
+                            viewType === "daily"
+                            ? {
                             labels: ["06/18", "06/19", "06/20", "06/21", "06/22", "06/23", "06/24"], //x축
                             datasets: [
                                 {
-                                    label: "가입자 수",
+                                    label: "일간별 가입자 수",
                                     data: [1237, 1108, 719, 2042, 1775, 1580, 1605],
                                     backgroundColor: "rgba(255, 99, 132, 0.5)",
                                     borderColor: "rgba(255, 99, 132, 1)",
                                     borderWidth: 1,
                                 },
-                                {
-                                    label: "가입자 수",
-                                    data: [1237, 1108, 719, 2042, 1775, 1580, 1605],
-                                    backgroundColor: "rgba(255, 99, 132, 0.5)",
-                                    borderColor: "rgba(255, 99, 132, 1)",
-                                    borderWidth: 1,
-                                },
+
                             ],
+                        }
+                        : {
+                             labels: ["06/18", "06/19", "06/20", "06/21", "06/22", "06/23", "06/24"], //x축
+                            datasets: [
+                                {
+                                    label: "주간별 가입자 수",
+                                    data: [2000, 1108, 719, 2042, 1775, 1580, 1605],
+                                    backgroundColor: "rgba(255, 99, 132, 0.5)",
+                                    borderColor: "rgba(255, 99, 132, 1)",
+                                    borderWidth: 1,
+                                },
+
+                            ],
+
                         }}
                     />
                 </div>
