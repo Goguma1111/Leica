@@ -13,7 +13,7 @@ public interface MemberMapper {
 
         //가입 인원수 집계
         @Insert ("insert into NewMember (date, `count`) "
-                + "SELECT DATE(regdate) AS date, COUNT(*) AS count "
+                + "SELECT DATE(regdate) AS date " 
                 + "FROM Member "
                 + "WHERE DATE(regdate) = DATE(DATE_ADD(NOW(), INTERVAL -1 DAY))"
                 + "GROUP BY DATE(regdate)")
@@ -22,7 +22,7 @@ public interface MemberMapper {
 
         //주간별 가입 인원수 조회
         @Select("SELECT "
-        + "date, count(*)"
+        + "date, count " 
         + "FROM NewMember "
         + "WHERE date >= DATE(DATE_ADD(NOW(), INTERVAL -7 DAY)) "
         + "GROUP BY date")

@@ -14,7 +14,6 @@ public interface MemberService {
     /** 주간 가입자 수  */
     List<NewMember> getWeeklyNewMembers();
 
-    Map<String, Object> sendJson();
 
 
 }
