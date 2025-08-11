@@ -1,15 +1,10 @@
-import React, {memo} from 'react';
-
-import Styled from 'styled-components';
-
-
+import React, { memo, useState } from 'react';
+import styled from 'styled-components';
 
 import {
-    // 공통항목
     Chart,
     CategoryScale,
     LinearScale,
-    // 세로 , 가로막대 그래프 전용
     BarElement,
     Title,
     Tooltip,
@@ -17,13 +12,11 @@ import {
     Filler
 } from 'chart.js';
 
-import {Bar} from 'react-chartjs-2';
-
+import { Bar } from 'react-chartjs-2';
 
 Chart.register(
     CategoryScale,
     LinearScale,
-    // 세로 , 가로막대 그래프 전용
     BarElement,
     Title,
     Tooltip,
@@ -31,59 +24,93 @@ Chart.register(
     Filler
 );
 
-
-const ChartContainer = Styled.div`
-
-    .chart-wrapper {
+const ChartContainer = styled.div`
+    .header {
         display: flex;
-        flex-wrap: wrap;
-
-        /** 그래프 크기를 제어하는 역할 */
-        .chart-item {
-            width: 33.3%;
-            height: 400px;
-            padding: 20px;
-            box-sizing: border-box;
-
-        }
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
     }
-`;
+
+    h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    select {
+        padding: 8px 12px;
+        font-size: 16px;
+        border-radius: 4px;
+        border: 1px solid #999;
+        cursor: pointer;
+    }
+
+    .chart-item {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        height: auto; /* 차트 높이 설정 */
+    }
+    `;
 
 
 
 const TotalSales = memo(() => {
-    return (
+  const [change, setChange] = useState('weekly');
 
-        <ChartContainer>
-                <div className="chart-item">
-                    {/** 가로막대 그래프 */}
-                    <h3>총 매출</h3>
-                    <Bar options={{
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        indexAxis: 'y',
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                            }
-                        },
+  const dataSets = {
 
-                    }}
-                    data={{
-                        labels: ['2025년 4월', '2025년 5월', '2025년 6월', '2025년 7월', '2025년 8월'],
+    daily: {
+        labels: ['8/1', '8/2', '8/3', '8/4', '8/5', '8/6', '8/7'],
+        datasets: [{
+        label: '일간 총 매출',
+        data: [3200000, 3000000, 3100000, 3500000, 2800000, 2900000, 3600000],
+        backgroundColor: 'rgba(198, 204, 182, 0.7)',
+        borderColor: 'rgb(159, 170, 130)',
+        borderWidth: 1,
+        }]
+    },
 
-                        datasets: [{
-                            label: '총 매출',
-                            data: [88500000, 78000000, 67000000, 80000000, 90000000],
-                            backgroundColor: 'rgba(241, 245, 217, 0.2)',
-                            borderColor: 'rgb(159, 170, 130)',
-                            borderWidth: 1
-                        }]
-                    }} />
-                </div>
-            </ChartContainer>
-        )
-    });
+    weekly: {
+      labels: ['7월 1주', '7월 2주', '7월 3주', '7월 4주', '8월 1주'],
+      datasets: [{
+        label: '주간 총 매출',
+        data: [220000000, 210000000, 250000000, 200000000, 230000000],
+        backgroundColor: 'rgba(198, 204, 182, 0.7)',
+        borderColor: 'rgb(159, 170, 130)',
+        borderWidth: 1,
+      }]
+    }
+  };
 
+  return (
+    <ChartContainer>
+      <div className="header">
+        <h1>매출</h1>
+        <select value={change} onChange={e => setChange(e.target.value)}>
+          <option value="daily">일간</option>
+          <option value="weekly">주간</option>
+        </select>
+      </div>
+
+      <div className="chart-item">
+        <h2>{change === 'daily' ? '일간 총 매출' : '주간 총 매출'}</h2>
+        <Bar
+          options={{
+            responsive: true,
+            maintainAspectRatio: true,
+            indexAxis: 'y',
+            plugins: {
+              legend: {
+                position: 'bottom',
+              }
+            }
+          }}
+          data={dataSets[change]}
+        />
+      </div>
+    </ChartContainer>
+  );
+});
 
 export default TotalSales;
