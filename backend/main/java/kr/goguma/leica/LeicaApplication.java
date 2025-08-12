@@ -10,7 +10,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-@MapperScan({"kr.goguma.leica.goguma1111.Mapper", "kr.goguma.leica.Seo.mapper", "kr.goguma.leica.mapper", "kr.goguma.leica.soppha.mapper"})
+
+@MapperScan({"kr.goguma.leica.mapper", "kr.goguma.leica.Seo.mapper","kr.goguma.leica.soppha.mapper"})
 @ComponentScan(basePackages = "kr.goguma.leica")
 @EnableScheduling
 public class LeicaApplication {
