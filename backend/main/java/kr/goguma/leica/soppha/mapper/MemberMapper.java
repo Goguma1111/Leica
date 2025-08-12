@@ -13,22 +13,21 @@ public interface MemberMapper {
 
         //가입 인원수 집계
         @Insert ("insert into NewMember (date, `count`) "
-                + "SELECT DATE(regdate) AS date"
+                + "SELECT DATE(regdate) AS date, COUNT(*) AS count "
                 + "FROM Member "
                 + "WHERE DATE(regdate) = DATE(DATE_ADD(NOW(), INTERVAL -1 DAY))"
                 + "GROUP BY DATE(regdate)")
-                public void insertMember(NewMember Member);
+                public void insertMember();
 
 
-        //주간별 가입 인원수 조회
+        //일별 가입자 조회
         @Select("SELECT "
-        + "date, count"
+        + "`date`, `count` "
         + "FROM NewMember "
-        + "WHERE date >= DATE(DATE_ADD(NOW(), INTERVAL -7 DAY)) "
-        + "GROUP BY date")
+        + "WHERE `date` >= DATE(DATE_ADD(NOW(), INTERVAL -7 DAY)) " )
         public List<NewMember> getDailyNewMembers();
 
-        //일별 가입자 통계
+        //주간별 가입자 통계
         @Select("SELECT "
         + "DATE_FORMAT(regdate, '%Y-%M' ) AS WEEKEND, "
         + "DATE_FORMAT(DATE_SUB(`regdate`, INTERVAL (DAYOFWEEK(regdate)-1) DAY), '%Y/%m/%d') AS Week_Start, "

@@ -13,15 +13,20 @@ import kr.goguma.leica.soppha.mapper.MemberMapper;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-   private final MemberMapper memberMapper;
-
-   @Override
-   public List<NewMember> getDailyNewMembers() {
-       return memberMapper.getDailyNewMembers();
-   }
+    private final MemberMapper memberMapper;
 
     @Override
-   public List<NewMember> getWeeklyNewMembers() {
-       return memberMapper.getWeeklyNewMembers();
-   }
+    public List<NewMember> getDailyNewMembers() {
+        return memberMapper.getDailyNewMembers();
+    }
+
+    @Override
+    public List<NewMember> getWeeklyNewMembers() {
+        return memberMapper.getWeeklyNewMembers();
+    }
+
+    @Override
+    public void insertDailyNewMembers() {
+        memberMapper.insertMember();
+    }
 }
