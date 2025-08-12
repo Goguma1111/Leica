@@ -1,4 +1,4 @@
-package kr.goguma.leica.goguma1111.Models;
+package kr.goguma.leica.goguma1111.models;
 
 import lombok.Data;
 

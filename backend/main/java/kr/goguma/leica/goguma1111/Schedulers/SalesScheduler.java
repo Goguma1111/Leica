@@ -1,4 +1,4 @@
-package kr.goguma.leica.goguma1111.Schedulers;
+package kr.goguma.leica.goguma1111.schedulers;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import kr.goguma.leica.goguma1111.Service.SalesService;
+import kr.goguma.leica.goguma1111.service.SalesService;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 

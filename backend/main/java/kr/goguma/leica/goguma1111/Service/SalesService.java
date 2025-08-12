@@ -1,14 +1,18 @@
-package kr.goguma.leica.goguma1111.Service;
+package kr.goguma.leica.goguma1111.service;
 
-import kr.goguma.leica.goguma1111.Mapper.SalesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import kr.goguma.leica.goguma1111.mapper.SalesMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 
 @Service
 public class SalesService {
+
+    private static final Logger log = LoggerFactory.getLogger(SalesService.class);
 
     @Autowired
     private SalesMapper salesMapper;
@@ -21,25 +25,41 @@ public class SalesService {
 
     // 일간 매출
     public int getDailySales(LocalDate date) {
-        return getTotalSales(date, date);
+        try {
+            int output = getTotalSales(date, date);
+            log.debug("일간 매출 조회 결과 - date: {}, output: {}", date, output);
+            return output;
+        } catch (Exception e) {
+            log.error("일간 매출 조회 실패 - date: {}", date, e);
+            return 0;
+        }
     }
-
 
     // 주간 매출
     public int getWeeklySales() {
-        // 오늘 날짜
-        LocalDate today = LocalDate.now();
+        try {
+            LocalDate today = LocalDate.now();
+            LocalDate sevenDaysAgo = today.minusDays(6);
+            int output = getTotalSales(sevenDaysAgo, today);
+            log.debug("주간 매출 조회 결과 - startDate: {}, endDate: {}, output: {}", sevenDaysAgo, today, output);
 
-        LocalDate sevenDaysAgo = today.minusDays(6);
-
-        return getTotalSales(sevenDaysAgo, today);
+            return output;
+        } catch (Exception e) {
+            log.error("주간 매출 조회 실패", e);
+            return 0;
+        }
     }
 
     // 총매출
     public int getTotalSales(LocalDate startDate, LocalDate endDate) {
-        // MariaDB에서 사용하는 백틱(`` ` ``)을 사용
         String sql = "SELECT COALESCE(SUM(`count`), 0) FROM sales WHERE date BETWEEN ? AND ?";
-        Integer totalSales = jdbcTemplate.queryForObject(sql, Integer.class, startDate, endDate);
-        return totalSales != null ? totalSales : 0;
+        try {
+            Integer output = jdbcTemplate.queryForObject(sql, Integer.class, startDate, endDate);
+            log.debug("총 매출 조회 결과 - startDate: {}, endDate: {}, output: {}", startDate, endDate, output);
+            return output != null ? output : 0;
+        } catch (Exception e) {
+            log.error("총 매출 조회 실패 - startDate: {}, endDate: {}", startDate, endDate, e);
+            return 0;
+        }
     }
 }

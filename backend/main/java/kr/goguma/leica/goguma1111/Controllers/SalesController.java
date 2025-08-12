@@ -1,9 +1,8 @@
-package kr.goguma.leica.goguma1111.Controllers;
+package kr.goguma.leica.goguma1111.controllers;
 
-import kr.goguma.leica.goguma1111.Service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import kr.goguma.leica.goguma1111.service.SalesService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import kr.goguma.leica.goguma1111.Service.SalesService;
+import kr.goguma.leica.goguma1111.service.SalesService;
 import lombok.extern.slf4j.Slf4j;
 
 
