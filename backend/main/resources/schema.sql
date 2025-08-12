@@ -1,3 +1,4 @@
+SET MODE MySQL;
 -- 인기 제품 테이블 생성
 CREATE TABLE IF NOT EXISTS today_best_product (
     id INT AUTO_INCREMENT PRIMARY KEY,
