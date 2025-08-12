@@ -1,6 +1,7 @@
 package kr.goguma.leica.soppha.services.impl;
 
 import java.util.List;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import kr.goguma.leica.soppha.models.NewMember;
 import kr.goguma.leica.soppha.services.MemberService;
@@ -11,6 +12,7 @@ import kr.goguma.leica.soppha.mapper.MemberMapper;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Primary
 public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
