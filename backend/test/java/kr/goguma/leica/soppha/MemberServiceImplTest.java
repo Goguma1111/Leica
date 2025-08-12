@@ -20,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootTest
-@Import(MemberServiceImpl.class)
 @MapperScan("kr.goguma.leica.soppha.mapper")
 public class MemberServiceImplTest {
 

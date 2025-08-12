@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 
-@MapperScan({"kr.goguma.leica.mapper", "kr.goguma.leica.Seo.mapper","kr.goguma.leica.soppha.mapper", "kr.goguma.leica.goguma1111.mapper", "kr.goguma.leica"})
+@MapperScan({"kr.goguma.leica.Mapper", "kr.goguma.leica.Seo.mapper","kr.goguma.leica.soppha.mapper", "kr.goguma.leica.goguma1111.mapper", "kr.goguma.leica"})
 @ComponentScan(basePackages = "kr.goguma.leica")
 @EnableScheduling
 public class LeicaApplication {

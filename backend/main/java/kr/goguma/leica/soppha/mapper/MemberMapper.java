@@ -29,12 +29,12 @@ public interface MemberMapper {
 
         //주간별 가입자 통계
         @Select("SELECT "
-        + "DATE_FORMAT(regdate, '%Y-%M' ) AS WEEKEND, "
-        + "DATE_FORMAT(DATE_SUB(`regdate`, INTERVAL (DAYOFWEEK(regdate)-1) DAY), '%Y/%m/%d') AS Week_Start, "
-        + "DATE_FORMAT(DATE_SUB(`regdate`, INTERVAL (DAYOFWEEK(regdate)-7) DAY), '%Y/%m/%d') AS Week_End, "
+        + "DATE_FORMAT(date, '%Y-%M' ) AS WEEKEND, "
+        + "DATE_FORMAT(DATE_SUB(`date`, INTERVAL (DAYOFWEEK(date)-1) DAY), '%Y/%m/%d') AS Week_Start, "
+        + "DATE_FORMAT(DATE_SUB(`date`, INTERVAL (DAYOFWEEK(date)-7) DAY), '%Y/%m/%d') AS Week_End, "
         + "SUM(count) AS count "
         + "FROM NewMember "
-        + "WHERE DATE(regdate) >= DATE(DATE_ADD(NOW(), INTERVAL -7 DAY)) "
+        + "WHERE DATE(date) >= DATE(DATE_ADD(NOW(), INTERVAL -7 DAY)) "
         + "GROUP BY WEEKEND, Week_Start, Week_End ")
         List<NewMember> getWeeklyNewMembers();
 }
