@@ -21,6 +21,7 @@ public class SalesController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(start, formatter);
         LocalDate endDate = LocalDate.parse(end, formatter);
+        // 매출 조회 서비스 호출
 
         return salesService.getTotalSales(startDate, endDate);
     }
