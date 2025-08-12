@@ -26,17 +26,17 @@ repositories {
 	mavenCentral()
 }
 
-// 비표준 디렉터리 구조를 Gradle에 매핑
-sourceSets {
-	main {
-		java.srcDirs = ['main/java']
-		resources.srcDirs = ['main/resources']
-	}
-	test {
-		java.srcDirs = ['test/java']
-		resources.srcDirs = ['test/resources']
-	}
-}
+// // 비표준 디렉터리 구조를 Gradle에 매핑
+// sourceSets {
+// 	main {
+// 		java.srcDirs = ['main/java']
+// 		resources.srcDirs = ['main/resources']
+// 	}
+// 	test {
+// 		java.srcDirs = ['test/java']
+// 		resources.srcDirs = ['test/resources']
+// 	}
+// }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -48,7 +48,7 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 
 	// H2 Database 의존성 추가
-	runtimeOnly 'com.h2database:h2'
+	//runtimeOnly 'com.h2database:h2'
 
 	// Swagger UI 의존성 추가
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
@@ -61,7 +61,8 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.38'
     testCompileOnly 'org.projectlombok:lombok:1.18.38'
 
-
+implementation 'mysql:mysql-connector-java:8.0.33'
+implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 
 

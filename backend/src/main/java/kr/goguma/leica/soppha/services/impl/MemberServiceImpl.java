@@ -3,11 +3,12 @@ package kr.goguma.leica.soppha.services.impl;
 import java.util.List;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+
+import kr.goguma.leica.soppha.mapper.MemberMapper;
 import kr.goguma.leica.soppha.models.NewMember;
 import kr.goguma.leica.soppha.services.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import kr.goguma.leica.soppha.mapper.MemberMapper;
 
 @Slf4j
 @Service
