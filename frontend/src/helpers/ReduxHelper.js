@@ -20,8 +20,8 @@ const fulfilled = (state, {meta, payload}) => {
 const rejected = (state, {meta, payload}) => {
     return {...state,
         loading: false,
-        status: payload.status || 0,
-        message: payload.message || 'Unknown Error'
+        status: payload?.status || 0,
+        message: payload?.message || 'Unknown Error'
 
     };
 
@@ -45,7 +45,7 @@ const reduxHelper = {
             extraReducers: (builder) => {
                 extraReducers.forEach((v,i) => {
                    builder.addCase(v.pending, pending);
-                    builder.addCase(v.fulfilled, callback[v.fulfilled] || fulfilled);
+                    builder.addCase(v.fulfilled, fulfilled);
                     builder.addCase(v.rejected, rejected);
                 });
             },
@@ -58,6 +58,7 @@ const reduxHelper = {
         return createAsyncThunk(alias, async (payload, { rejectWithValue }) => {
             let result = null;
             const { url, params } = callback(payload);
+            console.log("reduxHelper.get URL:", url);
 
             try {
                 result = await fetchHelper.get(url, params);

@@ -1,11 +1,13 @@
 import reduxHelper from '../helpers/ReduxHelper';
 
 
-const API_URL = "/api/members/daily";
+const DAILY_URL = "/api/members/daily";
+const WEEKLY_URL = "/api/members/weekly";
 
 
-export const getList = reduxHelper.get("LeicaSlice", "getList", API_URL);
+export const getDaily = reduxHelper.get("LeicaDaily", DAILY_URL);
+export const getWeekly = reduxHelper.get("LeicaWeekly", WEEKLY_URL);
 
-const LeicaSlice = reduxHelper.getDefaultSlice("LeicaSlice", [getList]);
+const LeicaSlice = reduxHelper.getDefaultSlice("LeicaSlice", [getDaily, getWeekly]);
 
 export default LeicaSlice.reducer;

@@ -8,8 +8,10 @@
  * yarn add chart.js react-chartjs-2
  */
 
-import React, { memo, useState } from "react";
+import React, { memo, useState, useEffect } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { getDaily, getWeekly } from "../slices/LeicaSlice";
 import {
     //공통항목들
     Chart,
@@ -90,8 +92,47 @@ const ChartContainer = styled.div`
     }
 `;
 
+
 const ChartEx = memo(() => {
-    const [viewType, setViewType] = useState("daily");
+    const [viewType, setViewType] = useState("daily"); 
+    const dispatch = useDispatch();
+    const state = useSelector((state) => state.LeicaSlice);
+
+    useEffect(() => {
+        //viewType에 따라 api 호출
+        if (viewType === "daily") {
+            console.log("getDaily 디스패치 실행");
+        dispatch(getDaily());
+    } else {
+        dispatch(getWeekly());
+    }
+    }, [viewType, dispatch]);
+
+    //드롭다운 변경시
+    const onChangeViewType = (e) => {
+        setViewType(e.target.value);
+    };
+
+    //차트데이터 가져오기
+    const { item } = state;
+
+const chartData = {
+  labels: item?.map((row) =>
+    viewType === "daily"
+      ? row.date
+      : `${row.weekStart} ~ ${row.weekEndDate}`
+  ) || [],
+  datasets: [
+    {
+      label: viewType === "daily" ? "일간 가입자 수" : "주간 가입자 수",
+      data: item?.map((row) => row.count) || [],
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      borderColor: "rgba(255, 99, 132, 1)",
+      borderWidth: 1,
+    },
+  ],
+};
+
 
     return (
         <ChartContainer>
@@ -103,7 +144,7 @@ const ChartEx = memo(() => {
                 <div className="chart-item">
                     <div className="chart-header">
                         <h3>날짜별 신규 회원 수</h3>
-                        <select id="viewType" value={viewType} onChange={(e) => setViewType(e.target.value)}>
+                        <select id="viewType" value={viewType} onChange={onChangeViewType}>
                             <option value="daily">일간</option>
                             <option value="weekly">주간</option>
                         </select>
@@ -121,36 +162,15 @@ const ChartEx = memo(() => {
                                     position: "bottom", //범주의 위치
                                 },
                             },
+                            scales: {
+                                y: {
+                                    ticks: {
+                                        precision: 0 //소숫점 제거
+                                    }
+                                }
+                            }
                         }}
-                        data={
-                            viewType === "daily"
-                            ? {
-                            labels: ["06/18", "06/19", "06/20", "06/21", "06/22", "06/23", "06/24"], //x축
-                            datasets: [
-                                {
-                                    label: "일간별 가입자 수",
-                                    data: [1237, 1108, 719, 2042, 1775, 1580, 1605],
-                                    backgroundColor: "rgba(255, 99, 132, 0.5)",
-                                    borderColor: "rgba(255, 99, 132, 1)",
-                                    borderWidth: 1,
-                                },
-
-                            ],
-                        }
-                        : {
-                             labels: ["2024-06-18 ~ 2024-06-24", " 2024-06-25 ~ 2024-07-01", "2024-07-02 ~ 2024-07-08", "2024-07-09 ~ 2024-07-15", "2024-07-16 ~ 2024-07-22", "2024-07-23 ~ 2024-07-29", "2024-07-30 ~ 2024-08-05"], //x축
-                            datasets: [
-                                {
-                                    label: "주간별 가입자 수",
-                                    data: [2000, 1108, 719, 2042, 1775, 1580, 1605],
-                                    backgroundColor: "rgba(255, 99, 132, 0.5)",
-                                    borderColor: "rgba(255, 99, 132, 1)",
-                                    borderWidth: 1,
-                                },
-
-                            ],
-
-                        }}
+                        data={chartData}
                     />
                 </div>
             </div>

@@ -19,7 +19,7 @@ public class MemberScheduler {
 
 
 
-    @Scheduled(cron = "0 0 1 * * ?")
+    @Scheduled(cron = "0 * * * * ?")
     public void collectDailyNewMembers() throws InterruptedException {
         log.info("스케쥴링 활성화");
            try {
