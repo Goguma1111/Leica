@@ -1,35 +1,30 @@
 package kr.goguma.leica.goguma1111.mapper;
 
-import java.time.LocalDate;
-
 import java.util.List;
 import java.util.Map;
 
-
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface SalesMapper {
 
-    @Select("SELECT date AS label, SUM(count) AS totalCount " +
+    // 일간 매출: 날짜별 금액
+    @Select("SELECT date AS label, count AS totalCount " +
             "FROM sales " +
-            "WHERE id = #{id} AND date BETWEEN #{startDate} AND #{endDate} " +
-            "GROUP BY date ORDER BY date")
-    List<Map<String, Object>> selectDailySales(
-        @Param("id") String id,
-        @Param("startDate") LocalDate startDate,
-        @Param("endDate") LocalDate endDate
-    );
+            "WHERE date BETWEEN '2025-08-01' AND '2025-08-31' " +
+            "ORDER BY date")
+    List<Map<String, Object>> selectDailySales();
 
-    @Select("SELECT CONCAT(YEAR(date), '년 ', WEEK(date, 1), '주') AS label, SUM(count) AS totalCount " +
+    // 주간 매출: 월 기준 1~5주
+    @Select("SELECT " +
+            "CONCAT(MONTH(date), '월 ', FLOOR((DAY(date)-1)/7)+1, '주') AS label, " +
+            "MIN(date) AS startdate, " +
+            "MAX(date) AS enddate, " +
+            "SUM(count) AS totalCount " +
             "FROM sales " +
-            "WHERE id = #{id} AND date BETWEEN #{startDate} AND #{endDate} " +
-            "GROUP BY YEAR(date), WEEK(date, 1) ORDER BY YEAR(date), WEEK(date, 1)")
-    List<Map<String, Object>> selectWeeklySales(
-        @Param("id") String id,
-        @Param("startDate") LocalDate startDate,
-        @Param("endDate") LocalDate endDate
-    );
+            "WHERE date BETWEEN '2025-08-01' AND '2025-08-31' " +
+            "GROUP BY MONTH(date), FLOOR((DAY(date)-1)/7)+1 " +
+            "ORDER BY MONTH(date), FLOOR((DAY(date)-1)/7)+1")
+    List<Map<String, Object>> selectWeeklySales();
 }
