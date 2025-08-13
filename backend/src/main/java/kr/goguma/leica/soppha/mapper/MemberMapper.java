@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import kr.goguma.leica.soppha.models.NewMember;
 
+//src
 @Mapper
 public interface MemberMapper {
 
@@ -24,7 +25,7 @@ public interface MemberMapper {
 
         //일별 가입자 조회
         @Select("SELECT "
-        + "DATE(`date`) AS `date`, " 
+        + "DATE(`date`) AS `date`, "
         + "SUM(`count`) AS `count` "
         + "FROM NewMember "
         + "WHERE `date` >= CURDATE() - INTERVAL 6 DAY "
