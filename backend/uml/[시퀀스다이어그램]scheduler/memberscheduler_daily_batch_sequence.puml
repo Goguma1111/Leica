@@ -1,0 +1,27 @@
+@startuml
+skinparam dpi 200
+
+actor "Spring Scheduler" as Scheduler
+participant MemberScheduler
+participant MemberService
+participant MemberMapper
+database Database
+
+Scheduler -> MemberScheduler: collectDailyNewMembers()
+
+MemberScheduler -> MemberService: insertDailyNewMembers()
+activate MemberService
+MemberService -> MemberMapper: insertMember() \n전일 가입자 집계 + INSERT
+activate MemberMapper
+MemberMapper -> Database: INSERT INTO NewMember\n(SELECT ... FROM Member WHERE DATE(date)=어제)
+activate Database
+Database --> MemberMapper: affected rows
+deactivate Database
+MemberMapper --> MemberService: int
+deactivate MemberMapper
+MemberService --> MemberScheduler: void
+deactivate MemberService
+
+note right of MemberScheduler: [스케줄러] 전일 가입자 수 집계 완료 \n또는 실패 로그 출력
+
+@enduml

@@ -19,10 +19,11 @@ public class MemberScheduler {
 
 
 
-    @Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 0 01 * * ?")
     public void collectDailyNewMembers() throws InterruptedException {
         log.info("스케쥴링 활성화");
            try {
+             int dayOffset = (int) (Math.random() * 7);
             ms.insertDailyNewMembers(); // 매퍼에서 전일 가입자 집계 + INSERT
             log.info("[스케줄러] 전일 가입자 수 집계 완료");
         } catch (Exception e) {

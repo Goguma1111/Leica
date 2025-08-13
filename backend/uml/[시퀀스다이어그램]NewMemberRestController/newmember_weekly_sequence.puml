@@ -1,0 +1,35 @@
+@startuml
+skinparam dpi 200
+
+actor Actor as "사용자"
+participant NewMemberRestController
+participant MemberService
+participant MemberMapper
+participant RestHelper
+participant Database
+
+Actor -> NewMemberRestController: GET /api/members/weekly
+activate NewMemberRestController
+
+NewMemberRestController -> MemberService: getWeeklyNewMembers()
+activate MemberService
+MemberService -> MemberMapper: selectWeeklyNewMembers()
+activate MemberMapper
+MemberMapper -> Database: SELECT (최근 5주 주간 가입자 수)
+activate Database
+Database --> MemberMapper: List<NewMember>
+deactivate Database
+MemberMapper --> MemberService: List<NewMember>
+deactivate MemberMapper
+MemberService --> NewMemberRestController: List<NewMember>
+deactivate MemberService
+
+NewMemberRestController -> RestHelper: sendJson(List<NewMember>)
+activate RestHelper
+RestHelper --> NewMemberRestController: Map<String, Object>
+deactivate RestHelper
+
+NewMemberRestController --> Actor: JSON 응답
+deactivate NewMemberRestController
+
+@enduml

@@ -92,9 +92,8 @@ const ChartContainer = styled.div`
     }
 `;
 
-
 const ChartEx = memo(() => {
-    const [viewType, setViewType] = useState("daily"); 
+    const [viewType, setViewType] = useState("daily");
     const dispatch = useDispatch();
     const state = useSelector((state) => state.LeicaSlice);
 
@@ -102,10 +101,10 @@ const ChartEx = memo(() => {
         //viewType에 따라 api 호출
         if (viewType === "daily") {
             console.log("getDaily 디스패치 실행");
-        dispatch(getDaily());
-    } else {
-        dispatch(getWeekly());
-    }
+            dispatch(getDaily());
+        } else {
+            dispatch(getWeekly());
+        }
     }, [viewType, dispatch]);
 
     //드롭다운 변경시
@@ -116,23 +115,18 @@ const ChartEx = memo(() => {
     //차트데이터 가져오기
     const { item } = state;
 
-const chartData = {
-  labels: item?.map((row) =>
-    viewType === "daily"
-      ? row.date
-      : `${row.weekStart} ~ ${row.weekEndDate}`
-  ) || [],
-  datasets: [
-    {
-      label: viewType === "daily" ? "일간 가입자 수" : "주간 가입자 수",
-      data: item?.map((row) => row.count) || [],
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-      borderColor: "rgba(255, 99, 132, 1)",
-      borderWidth: 1,
-    },
-  ],
-};
-
+    const chartData = {
+        labels: item?.map((row) => (viewType === "daily" ? row.date : `${row.weekStart} ~ ${row.weekEndDate}`)) || [],
+        datasets: [
+            {
+                label: viewType === "daily" ? "일간 가입자 수" : "주간 가입자 수",
+                data: item?.map((row) => row.count) || [],
+                backgroundColor: "rgba(255, 99, 132, 0.5)",
+                borderColor: "rgba(255, 99, 132, 1)",
+                borderWidth: 1,
+            },
+        ],
+    };
 
     return (
         <ChartContainer>
@@ -149,9 +143,8 @@ const chartData = {
                             <option value="weekly">주간</option>
                         </select>
                     </div>
-                     {/* 조건부 렌더링 */}
+                    {/* 조건부 렌더링 */}
                     <h3>{viewType === "daily" ? "일간" : "주간"}</h3>
-
 
                     <Line
                         options={{
@@ -165,10 +158,10 @@ const chartData = {
                             scales: {
                                 y: {
                                     ticks: {
-                                        precision: 0 //소숫점 제거
-                                    }
-                                }
-                            }
+                                        precision: 0, //소숫점 제거
+                                    },
+                                },
+                            },
                         }}
                         data={chartData}
                     />

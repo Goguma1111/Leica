@@ -40,7 +40,7 @@ public interface MemberMapper {
         + "DATE_FORMAT(DATE_SUB(`date`, INTERVAL (DAYOFWEEK(date)-7) DAY), '%Y/%m/%d') AS WeekEndDate, "
         + "SUM(count) AS count "
         + "FROM NewMember "
-        + "WHERE DATE(date) >= DATE(DATE_ADD(NOW(), INTERVAL -7 DAY)) "
+        + "WHERE DATE(date) >= DATE(DATE_ADD(NOW(), INTERVAL -35 DAY)) "
         + "GROUP BY weekEnd, WeekStart, WeekEndDate ")
         List<NewMember> getWeeklyNewMembers();
 }
